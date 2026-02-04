@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+- Fixed typo in README.md
+
 ## 0.1.0
 
 Initial release.

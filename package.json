@@ -1,6 +1,6 @@
 {
-  "name": "wipc",
-  "version": "0.1.0",
+  "name": "wipc-js",
+  "version": "0.1.1",
   "description": "Binary bidirectional IPC over stdin/stdout for WASM and native runtimes",
   "keywords": [
     "ipc",

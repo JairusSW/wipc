@@ -4,8 +4,8 @@
 
 <p align="center">
   <a href="https://github.com/JairusSW/wipc/actions"><img src="https://github.com/JairusSW/wipc/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="https://www.npmjs.com/package/wipc"><img src="https://img.shields.io/npm/v/wipc" alt="npm"></a>
-  <a href="./LICENSE"><img src="https://img.shields.io/npm/l/wipc" alt="license"></a>
+  <a href="https://www.npmjs.com/package/wipc-js"><img src="https://img.shields.io/npm/v/wipc-js" alt="npm"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/npm/l/wipc-js" alt="license"></a>
 </p>
 
 **Wire IPC** -- minimal binary framing over standard i/o.
@@ -17,7 +17,7 @@ If a process can read `stdin` and write `stdout`, it can speak WIPC.
 ## Install
 
 ```sh
-npm install wipc
+npm install wipc-js
 ```
 
 ## Example: Echo
@@ -25,7 +25,7 @@ npm install wipc
 ### Host (Node.js / Bun)
 
 ```ts
-import { Channel, MessageType } from "wipc";
+import { Channel, MessageType } from "wipc-js";
 import { spawn } from "node:child_process";
 
 const child = spawn("wasmtime", ["./build/test.wasm"], {
@@ -50,7 +50,7 @@ ch.send(MessageType.DATA, Buffer.from("hello"));
 ### Guest (AssemblyScript)
 
 ```ts
-import { readFrame, writeFrame, MessageType, Frame } from "wipc/assembly/channel";
+import { readFrame, writeFrame, MessageType, Frame } from "wipc-js/assembly/channel";
 
 while (true) {
   const frame: Frame | null = readFrame();
@@ -127,7 +127,7 @@ WIPC frames and regular stdout coexist on the same stream. The `Channel` parser 
 ### `Channel`
 
 ```ts
-import { Channel, MessageType } from "wipc";
+import { Channel, MessageType } from "wipc-js";
 ```
 
 **Sending:**
@@ -146,7 +146,7 @@ import { Channel, MessageType } from "wipc";
 ### Guest API (AssemblyScript)
 
 ```ts
-import { readFrame, writeFrame, MessageType } from "wipc/assembly";
+import { readFrame, writeFrame, MessageType } from "wipc-js/assembly";
 ```
 
 - `writeFrame(type, payload?)` -- write a frame to stdout
