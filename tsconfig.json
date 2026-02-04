@@ -16,8 +16,8 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "outDir": "dist",
+    "outDir": "dist"
   },
   "include": ["src", "bench", "test.ts", "pipe.ts"],
-  "exclude": ["assembly", "node_modules", "build", "dist"],
+  "exclude": ["assembly", "node_modules", "build", "dist"]
 }
