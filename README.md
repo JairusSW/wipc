@@ -165,26 +165,42 @@ npm test                 # run test suite
 
 ## Performance
 
-Node.js Channel encode/decode and in-process echo round-trip (Node v25):
+Here's some benchmarks taken on my personal machine using Node.js v25:
 
 ```
 Encode
-  small (27 B)           ~7M ops/s     144 MB/s
-  1 KB                   ~3M ops/s     3.4 GB/s
-  64 KB                  ~156K ops/s   10 GB/s
+  encode small (27 B)
+    388ms | 2,577,150 ops/s  | 57 MB/s
 
-Decode (zero-copy view)
-  small (27 B)           ~9M ops/s
-  1 KB                   ~9M ops/s
-  64 KB                  ~9M ops/s
+  encode 1 KB
+    593ms | 1,685,483 ops/s  | 1,726 MB/s
 
-Decode + copy
-  small (27 B)           ~7M ops/s     148 MB/s
-  1 KB                   ~4M ops/s     3.6 GB/s
-  64 KB                  ~156K ops/s   10 GB/s
+  encode 64 KB
+    449ms | 222,904 ops/s    | 14,608 MB/s
+
+Decode (zero-copy, returns subarray view)
+  decode small (27 B)
+    88ms  | 11,325,136 ops/s | 249 MB/s
+
+  decode 1 KB
+    88ms  | 11,388,579 ops/s | 11,662 MB/s
+
+  decode 64 KB
+    88ms  | 11,422,528 ops/s | 748,587 MB/s
+
+Decode + copy (Buffer.from)
+  decode+copy small (27 B)
+    130ms | 7,694,254 ops/s | 169 MB/s
+
+  decode+copy 1 KB
+    222ms | 4,496,633 ops/s | 4,605 MB/s
+
+  decode+copy 64 KB
+    387ms | 258,641 ops/s   | 16,950 MB/s
 
 Channel round-trip (in-process echo)
-  small (27 B)           ~507K rt/s    22 MB/s
+  echo small (27 B)
+    500,000 round-trips in 1,228ms | 407,213 rt/s | 18 MB/s
 ```
 
 Decoding returns a `subarray` view -- no copies, constant time regardless of payload size. When you need to own the data, `Buffer.from()` copies at memcpy speed. Encoding cost is dominated by `Buffer.concat`. Round-trip throughput is limited by Node.js stream backpressure, not framing overhead.
