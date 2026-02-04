@@ -1,0 +1,19 @@
+# Node modules
+node_modules
+
+# Lock files
+*.lock
+pnpm-lock.yaml
+package-lock.json
+*.lockb
+
+# Editor configs
+.vscode/
+.claude
+
+# Logs
+logs
+
+# Build / temp files
+build/
+*.tmp.ts

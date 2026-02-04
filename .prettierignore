@@ -1,0 +1,6 @@
+assembly/
+build/
+dist/
+node_modules/
+bun.lock
+*.wasm

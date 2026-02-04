@@ -1,0 +1,77 @@
+{
+  "name": "wipc",
+  "version": "0.1.0",
+  "description": "Binary bidirectional IPC over stdin/stdout for WASM and native runtimes",
+  "keywords": [
+    "ipc",
+    "wasm",
+    "webassembly",
+    "assemblyscript",
+    "stdio",
+    "rpc",
+    "binary",
+    "protocol",
+    "channel"
+  ],
+  "homepage": "https://github.com/JairusSW/wipc#readme",
+  "bugs": {
+    "url": "https://github.com/JairusSW/wipc/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JairusSW/wipc.git"
+  },
+  "license": "MIT",
+  "author": "Jairus Tanaka",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
+    },
+    "./assembly/channel": {
+      "types": "./assembly/channel/index.ts"
+    },
+    "./assembly/rpc": {
+      "types": "./assembly/rpc/index.ts"
+    }
+  },
+  "files": [
+    "src",
+    "assembly",
+    "SPEC.md",
+    "README.md"
+  ],
+  "scripts": {
+    "asbuild:debug": "asc assembly/index.ts --target debug",
+    "asbuild:release": "asc assembly/index.ts --target release",
+    "asbuild:test": "asc assembly/test.ts --outFile build/test.wasm --debug",
+    "asbuild": "npm run asbuild:debug && npm run asbuild:release && npm run asbuild:test",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "node --experimental-transform-types tests",
+    "test:echo": "node --experimental-transform-types test.ts",
+    "bench": "node --experimental-transform-types bench/index.ts"
+  },
+  "dependencies": {
+    "json-as": "^1.2.5"
+  },
+  "peerDependencies": {
+    "assemblyscript": "^0.28.9"
+  },
+  "devDependencies": {
+    "@assemblyscript/wasi-shim": "^0.1.0",
+    "@types/node": "^25.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "assemblyscript": "^0.28.9",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.54.0"
+  }
+}
